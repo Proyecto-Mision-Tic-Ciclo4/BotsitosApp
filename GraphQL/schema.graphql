@@ -1,0 +1,31 @@
+type Usuarios{
+    _id: ID!
+    info_usuario_codigo: Int!
+    info_usuario_rol: Int
+    info_usuario_email: String!
+    info_usuario_password: String
+    info_usuario_nombre: String
+    info_usuario_estado: String
+}
+
+input CreaUsuario{
+    info_usuario_codigo: Int!
+    info_usuario_rol: Int!
+    info_usuario_email: String!
+    info_usuario_password: String!
+    info_usuario_nombre: String!
+    info_usuario_estado: String!
+}
+
+type Query {
+    "Devuelve la informacion de todos los usuarios"
+    getUsuarios: [Usuarios]
+    "Devuelve la informacion de un usuario"
+    getUsuario (id: ID!): Usuarios
+}
+
+type Mutation {
+    "Crea un usuario"
+    crearUsuario(input: CreaUsuario!): Usuarios
+}
+

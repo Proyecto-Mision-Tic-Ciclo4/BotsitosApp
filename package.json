@@ -1,0 +1,39 @@
+{
+  "name": "botsitos_app",
+  "version": "1.0.0",
+  "description": "Aplicativo web del ciclo4  de mision Tic 2021",
+  "main": "index.js",
+  "scripts": {
+    "consumirAPI": "set NODE_ENV=produccion&&node index.js",
+    "webGraphQL": "nodemon -e js,graphql index",
+    "lint": "standard",
+    "lint-fix": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Proyecto-Mision-Tic-Ciclo4/BotsitosApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Proyecto-Mision-Tic-Ciclo4/BotsitosApp/issues"
+  },
+  "homepage": "https://github.com/Proyecto-Mision-Tic-Ciclo4/BotsitosApp#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.0.1",
+    "graphql-tools": "^8.2.0",
+    "mongo": "^0.1.0",
+    "mongodb": "^2.2.33",
+    "mongoose": "^5.7.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "standard": "^16.0.4"
+  }
+}
