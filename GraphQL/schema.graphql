@@ -1,7 +1,7 @@
 type Usuarios{
     _id: ID!
     info_usuario_codigo: Int!
-    info_usuario_rol: Int
+    info_usuario_rol: String
     info_usuario_email: String!
     info_usuario_password: String
     info_usuario_nombre: String
@@ -10,11 +10,17 @@ type Usuarios{
 
 input CreaUsuario{
     info_usuario_codigo: Int!
-    info_usuario_rol: Int!
+    info_usuario_rol: String!
     info_usuario_email: String!
     info_usuario_password: String!
     info_usuario_nombre: String!
     info_usuario_estado: String!
+}
+input UsuarioEditInput{
+    info_usuario_email: String
+    info_usuario_password: String
+    info_usuario_nombre: String
+    info_usuario_estado: String
 }
 
 type Query {
@@ -26,6 +32,9 @@ type Query {
 
 type Mutation {
     "Crea un usuario"
-    crearUsuario(input: CreaUsuario!): Usuarios
+     crearUsuario(input: CreaUsuario!): Usuarios
+    "Editar un usuario"
+    editarUsuario(_id:ID!,input:UsuarioEditInput):Usuarios
+    
 }
 
