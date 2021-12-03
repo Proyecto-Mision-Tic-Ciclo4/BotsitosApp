@@ -8,6 +8,21 @@ type Usuarios{
     info_usuario_estado: String
 }
 
+type Proyecto{
+    _id:ID!
+    codigo:Int!
+    nombre:String
+    objetivosG:String
+    objetivosS:String
+    presupuesto:String
+    fechaInicio:String
+    fechaFinal:String
+    nombre_lider:String
+    Identificacion_lider:Int
+    estado:String
+    fase:String           
+}   
+
 input CreaUsuario{
     info_usuario_codigo: Int!
     info_usuario_rol: String!
@@ -16,6 +31,19 @@ input CreaUsuario{
     info_usuario_nombre: String!
     info_usuario_estado: String!
 }
+input CrearProyecto{
+    codigo:Int!
+    nombre:String!
+    objetivosG:String!
+    objetivosS:String!
+    presupuesto:String!
+    fechaInicio:String!
+    fechaFinal:String!
+    nombre_lider:String!
+    Identificacion_lider:Int!
+    estado:String
+    fase:String
+}
 input UsuarioEditInput{
     info_usuario_email: String
     info_usuario_password: String
@@ -23,11 +51,18 @@ input UsuarioEditInput{
     info_usuario_estado: String
 }
 
+input ProyectoEditInput{
+    estado:String
+    fase:String
+}
+
 type Query {
     "Devuelve la informacion de todos los usuarios"
     getUsuarios: [Usuarios]
     "Devuelve la informacion de un usuario"
     getUsuario (id: ID!): Usuarios
+    "Devuelve todos los Proyectos"
+    getProyectos:[Proyecto]
 }
 
 type Mutation {
@@ -35,6 +70,10 @@ type Mutation {
      crearUsuario(input: CreaUsuario!): Usuarios
     "Editar un usuario"
     editarUsuario(_id:ID!,input:UsuarioEditInput):Usuarios
+    "Crear un Proyecto"
+     crearProyecto(input:CrearProyecto!):Proyecto
+    "Editar un proyecto"
+    editarProyecto(_id:ID!, input:ProyectoEditInput):Proyecto
     
 }
 

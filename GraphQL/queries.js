@@ -24,5 +24,16 @@ module.exports = {
             errorHandler(error)
         }
         return usuario
+    },
+    getProyectos: async()=>{
+        let db
+        let proyectos = []
+        try {
+            db = await conexionDB()
+            proyectos = await db.collection("proyectos").find().toArray()
+        } catch (error) {
+            errorHandler(error)
+        }
+        return proyectos
     }
 }
