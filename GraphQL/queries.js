@@ -24,5 +24,37 @@ module.exports = {
             errorHandler(error)
         }
         return usuario
-    }
+    },
+    getEstudianteProyecto: async (root, { codigo }) => {
+
+        let db
+        let Info_Estudiantes = []
+        
+        try {
+            db = await conexionDB()
+            const consulta = [
+                {'$lookup' : {
+                      'from' : 'estudiantes',
+                      'localField' : 'info_usuario_codigo',
+                      'foreignField' : 'estudiantes_info_usuario_codigo',
+                      'as' : 'estudiantes'
+                  }
+                },
+                {'$match':{'estudiantes.estudiante_proyectos.estudiante_proyectos_codigo':codigo}},
+                { "$project": { "info_usuario_codigo": 1,
+                                "info_usuario_email": 1,
+                                "info_usuario_nombre": 1,
+                                "estudiantes": 1,
+                                "_id": 0
+                              }}
+            ]
+
+            Info_Estudiantes = await db.collection('info_usuario').aggregate(consulta).toArray();
+
+        } catch (error) {
+            errorHandler(error)
+        }
+
+        return Info_Estudiantes
+    },
 }

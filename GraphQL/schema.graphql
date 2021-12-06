@@ -17,11 +17,31 @@ input CreaUsuario{
     info_usuario_estado: String!
 }
 
+type Estudiante_proyectos{
+    estudiante_proyectos_codigo:Int
+    estudiante_proyectos_estado:String
+}
+
+type Estudiante{
+    estudiantes_codigo: Int,
+    estudiantes_info_usuario_codigo: Int,
+    estudiante_proyectos:[Estudiante_proyectos] 
+}
+
+type Informacion_Estudiante{
+    info_usuario_codigo: Int,
+    info_usuario_email: String,
+    info_usuario_nombre: String,
+    estudiantes: [Estudiante]
+}
+
 type Query {
     "Devuelve la informacion de todos los usuarios"
     getUsuarios: [Usuarios]
     "Devuelve la informacion de un usuario"
     getUsuario (id: ID!): Usuarios
+    "Se obtienen los estudiantes por proyecto"
+    getEstudianteProyecto(codigo:Int): [Informacion_Estudiante]
 }
 
 type Mutation {
