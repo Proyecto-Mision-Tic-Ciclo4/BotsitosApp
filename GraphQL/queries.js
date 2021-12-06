@@ -40,11 +40,21 @@ module.exports = {
                       'as' : 'estudiantes'
                   }
                 },
-                {'$match':{'estudiantes.estudiante_proyectos.estudiante_proyectos_codigo':codigo}},
+                {'$match':{'estudiantes.estudiante_proyectos.estudiante_proyectos_codigo': {'$in': [codigo]}}},
+                {'$unwind': "$estudiantes"},
                 { "$project": { "info_usuario_codigo": 1,
                                 "info_usuario_email": 1,
                                 "info_usuario_nombre": 1,
-                                "estudiantes": 1,
+                                "estudiantes": {
+                                    "estudiantes_codigo": 1,
+                                    "estudiantes_info_usuario_codigo": 1,
+                                    "estudiante_proyectos": {
+                                        '$filter':{
+                                            'input': '$estudiantes.estudiante_proyectos',
+                                            'as': 'proyectos',
+                                            'cond': { '$eq': ['$$proyectos.estudiante_proyectos_codigo', codigo] }
+                                        }}
+                                },
                                 "_id": 0
                               }}
             ]

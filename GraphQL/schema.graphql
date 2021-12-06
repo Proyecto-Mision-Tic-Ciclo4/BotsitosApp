@@ -32,7 +32,7 @@ type Informacion_Estudiante{
     info_usuario_codigo: Int,
     info_usuario_email: String,
     info_usuario_nombre: String,
-    estudiantes: [Estudiante]
+    estudiantes: Estudiante
 }
 
 type Query {
