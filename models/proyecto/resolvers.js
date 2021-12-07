@@ -13,7 +13,7 @@ const resolversProyecto = {
   },
   Query: {
     Proyectos: async (parent, args, context) => {
-      const proyectos = await ProjectModel.find();
+      const proyectos = await ProjectModel.find()
       return proyectos;
     },
   },
