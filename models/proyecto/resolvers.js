@@ -1,7 +1,6 @@
 import { InscriptionModel } from '../inscripcion/inscripcion.js';
 import { UserModel } from '../usuario/usuario.js';
 import { ProjectModel } from './proyecto.js';
-
 const resolversProyecto = {
   Proyecto: {
     lider: async (parent, args, context) => {
@@ -10,10 +9,23 @@ const resolversProyecto = {
       });
       return usr;
     },
+    inscripciones: async (parent, args, context) => {
+      const inscripciones = await InscriptionModel.find({
+        proyecto: parent._id,
+      });
+      return inscripciones;
+    },
   },
   Query: {
     Proyectos: async (parent, args, context) => {
-      const proyectos = await ProjectModel.find()
+      if (context.userData) {
+        if (context.userData.rol === 'LIDER') {
+          const proyectos = await ProjectModel.find({ lider: context.userData._id });
+          console.log('es lider de', proyectos);
+          return proyectos;
+        }
+      }
+      const proyectos = await ProjectModel.find();
       return proyectos;
     },
   },
@@ -35,7 +47,6 @@ const resolversProyecto = {
         { ...args.campos },
         { new: true }
       );
-
       return proyectoEditado;
     },
     crearObjetivo: async (parent, args) => {
@@ -48,7 +59,6 @@ const resolversProyecto = {
         },
         { new: true }
       );
-
       return proyectoConObjetivo;
     },
     editarObjetivo: async (parent, args) => {
@@ -80,5 +90,4 @@ const resolversProyecto = {
     },
   },
 };
-
 export { resolversProyecto };
